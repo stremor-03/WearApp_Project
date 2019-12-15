@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Projet_Wear</string>
+    <string name="urlServer">https://hmin309-embedded-systems.herokuapp.com/message-exchange/messages/</string>
+    <string name="title_activity_message">MessageView</string>
 </resources>

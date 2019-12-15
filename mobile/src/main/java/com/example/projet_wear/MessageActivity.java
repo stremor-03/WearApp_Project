@@ -4,25 +4,22 @@ import android.Manifest;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
-import android.support.wearable.activity.WearableActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 
-import java.util.Locale;
-
-public class MessageActivity extends WearableActivity {
+public class MessageActivity extends AppCompatActivity {
 
     private TextView mMessageView;
     private TextView mStudentView;
@@ -74,8 +71,6 @@ public class MessageActivity extends WearableActivity {
                 }
             }
         };
-
-        setAmbientEnabled();
     }
 
     @Override
@@ -87,25 +82,14 @@ public class MessageActivity extends WearableActivity {
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
-
-                    Log.wtf("TAG","IN");
                 } else {
-
-                    Log.wtf("TAG","bye bye");
                     finish();
                 }
-                return;
             }
 
         }
     }
 
-    @Override
-    public void onEnterAmbient(Bundle ambientDetails) {
-        super.onEnterAmbient(ambientDetails);
-
-        finish();
-    }
 
     @Override
     protected void onResume() {
@@ -136,5 +120,6 @@ public class MessageActivity extends WearableActivity {
 
         LocationServices.getFusedLocationProviderClient(this).removeLocationUpdates(locationCallback);
     }
+
 
 }

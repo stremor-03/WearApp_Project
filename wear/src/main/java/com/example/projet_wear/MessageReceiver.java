@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 public class MessageReceiver extends Message implements Serializable {
 
-
     public MessageReceiver(int id, int student_id, double gps_lat, double gps_long, String student_message) {
         super(gps_lat,gps_long);
         this.id = id;
