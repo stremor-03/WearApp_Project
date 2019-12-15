@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.wear.widget.BoxInsetLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/bg_menu"
+    android:background="@color/bg_color_disenable"
+    android:padding="@dimen/box_inset_layout_padding"
+    android:layout_gravity="center"
+    tools:context=".MainActivity"
+    tools:deviceIds="wear">
+
+
+    <androidx.wear.widget.WearableRecyclerView
+        android:id="@+id/main_menu_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical"
+        android:visibility="visible" />
+
+    <com.tomerrosenfeld.customanalogclockview.CustomAnalogClock
+        android:id="@+id/analog_clock"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        app:default_watchface="true" />
+
+
+</androidx.wear.widget.BoxInsetLayout>
