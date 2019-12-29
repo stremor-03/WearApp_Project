@@ -1,5 +1,7 @@
 package com.example.projet_wear;
 
+import android.graphics.Color;
+
 public class MessageReceiver extends Message {
 
     public MessageReceiver(int id, int student_id, double gps_lat, double gps_long, String student_message) {
@@ -7,6 +9,7 @@ public class MessageReceiver extends Message {
         this.id = id;
         this.student_id = student_id;
         this.student_message = student_message;
+
     }
 
     public MessageReceiver() {

@@ -2,35 +2,29 @@ package com.example.projet_wear;
 
 import android.content.Context;
 import android.content.Intent;
-import android.database.DataSetObserver;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.ListAdapter;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import androidx.core.content.ContextCompat;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.Guideline;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.ArrayDeque;
 
 public class MainMenuAdapter extends RecyclerView.Adapter<MainMenuAdapter.RecyclerViewHolder> implements Serializable{
 
-    private ArrayList<MessageReceiver> dataSource = new ArrayList<MessageReceiver>();
+    private ArrayDeque<MessageReceiver> dataSource;
 
     private Context context;
     RecyclerViewHolder recyclerViewHolder;
-    ArrayList<RecyclerViewHolder> displayItem;
     ViewGroup view;
 
-    public MainMenuAdapter(Context context, ArrayList<MessageReceiver> dataArgs){
+    public MainMenuAdapter(Context context, ArrayDeque<MessageReceiver> dataArgs){
         this.context = context;
         this.dataSource = dataArgs;
-        this.displayItem = new ArrayList<>();
     }
 
     @Override
@@ -39,22 +33,34 @@ public class MainMenuAdapter extends RecyclerView.Adapter<MainMenuAdapter.Recycl
 
         this.view = parent;
         recyclerViewHolder = new RecyclerViewHolder(view);
-        displayItem.add(recyclerViewHolder);
 
         return recyclerViewHolder;
     }
 
     public static class RecyclerViewHolder extends RecyclerView.ViewHolder
     {
-        RelativeLayout menuContainer;
-        TextView menuItem;
-        ImageView menuIcon;
+        ConstraintLayout menuContainer;
+
+        TextView studentIDView;
+        TextView messageView;
+
+        TextView studentIDView_R;
+        TextView messageView_R;
+
+        Guideline guideline;
 
         public RecyclerViewHolder(View view) {
             super(view);
+
             menuContainer = view.findViewById(R.id.menu_container);
-            menuItem = view.findViewById(R.id.menu_studentid);
-            menuIcon = view.findViewById(R.id.menu_icon);
+            studentIDView = view.findViewById(R.id.menu_studentid);
+            messageView = view.findViewById(R.id.menu_message);
+
+            studentIDView_R = view.findViewById(R.id.menu_R_studentid);
+            messageView_R = view.findViewById(R.id.menu_R_message);
+
+            guideline = view.findViewById(R.id.middleline);
+
         }
     }
 
@@ -62,18 +68,17 @@ public class MainMenuAdapter extends RecyclerView.Adapter<MainMenuAdapter.Recycl
     public void onBindViewHolder(RecyclerViewHolder holder, final int position) {
         if(getItemCount() > 0) {
 
-            MessageReceiver data_provider = dataSource.get(position);
+            MessageReceiver data_provider = (MessageReceiver) dataSource.toArray()[position];
 
-            holder.menuItem.setText(String.valueOf(data_provider.getStudent_id()));
-           // holder.menuIcon.setImageResource(R.drawable.close_button);
+            data_provider.setMessageView(this.context,holder);
+
             holder.menuContainer.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(final View v) {
 
-                    MessageReceiver m = dataSource.get(position);
+                    MessageReceiver m = (MessageReceiver) dataSource.toArray()[position];
 
                     Intent intent = new Intent(context, MessageActivity.class);
-
                     intent.putExtra("message", m);
 
                     context.startActivity(intent);
@@ -83,12 +88,20 @@ public class MainMenuAdapter extends RecyclerView.Adapter<MainMenuAdapter.Recycl
         }
     }
 
+    
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return position;
+    }
+
     @Override
     public int getItemCount() {
         return dataSource.size();
     }
-
-
-
 
 }

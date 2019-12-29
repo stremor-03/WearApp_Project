@@ -3,9 +3,12 @@ package com.example.projet_wear;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -51,7 +54,7 @@ public class MessageActivity extends AppCompatActivity {
 
         locationRequest = LocationRequest.create();
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-        locationRequest.setInterval( 1 * 1000);
+        locationRequest.setInterval(  2 * 500);
 
         locationCallback = new LocationCallback() {
             @Override
