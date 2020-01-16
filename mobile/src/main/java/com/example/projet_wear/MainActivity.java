@@ -57,10 +57,10 @@ public class MainActivity extends AppCompatActivity {
     ArrayDeque<MessageReceiver> queueItems = new ArrayDeque<MessageReceiver>(){
 
         @Override
-        public boolean add(MessageReceiver messageReceiver) {
-            if(this.size() >= 20)
+        public void addLast(MessageReceiver messageReceiver) {
+            super.addLast(messageReceiver);
+            if(this.size() > 20)
                 this.removeFirst();
-            return super.add(messageReceiver);
         }
     };
 
@@ -138,10 +138,10 @@ public class MainActivity extends AppCompatActivity {
                             ArrayDeque<MessageReceiver> queue = new ArrayDeque<MessageReceiver>(){
 
                                 @Override
-                                public boolean add(MessageReceiver messageReceiver) {
-                                    if(this.size() >= 20)
+                                public void addLast(MessageReceiver messageReceiver) {
+                                    super.addLast(messageReceiver);
+                                    if(this.size() > 20)
                                         this.removeFirst();
-                                    return super.add(messageReceiver);
                                 }
                             };
 
@@ -159,7 +159,7 @@ public class MainActivity extends AppCompatActivity {
                             for(MessageReceiver m : queue){
                                 if(!containMessage(m.getId(), queueItems)){
                                     onChange = true;
-                                    queueItems.add(m);
+                                    queueItems.addLast(m);
                                 }
                             }
 

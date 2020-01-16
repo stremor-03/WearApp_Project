@@ -70,6 +70,7 @@ public class MessageActivity extends AppCompatActivity {
                         Location l = message.getLocation();
 
                         mPointer.setRotation(location.bearingTo(l));
+                        Log.wtf("TAG","pointer update "+mPointer.getRotation());
                     }
                 }
             }
